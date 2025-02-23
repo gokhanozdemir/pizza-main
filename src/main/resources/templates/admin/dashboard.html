@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+<!-- Navbar -->
+<nav class="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
+    <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-start items-center">
+            <span class="text-xl font-bold">Admin Panel</span>
+        </div>
+        <div class="flex items-center lg:order-2">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-2">Çıkış Yap</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-16 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <a th:href="@{/admin/dashboard}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 bg-gray-200">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/categories}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+                    <span>Kategoriler</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/products}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+                    <span>Ürünler</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 rounded-lg mt-14">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-xl font-bold mb-2">Toplam Kategori</h3>
+                <p class="text-3xl" th:text="${totalCategories}">0</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-xl font-bold mb-2">Toplam Ürün</h3>
+                <p class="text-3xl" th:text="${totalProducts}">0</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-xl font-bold mb-2">Toplam Stok</h3>
+                <p class="text-3xl" th:text="${totalStock}">0</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+<script th:inline="javascript">
+    const BASE_URL = /*[[@{/}]]*/ '';
+
+    async function fetchProducts() {
+        const response = await fetch(BASE_URL + 'api/product');
+        // ...
+    }
+</script>
+</body>
+</html>
